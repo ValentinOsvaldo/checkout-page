@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="src/assets/devchallenges.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+    <title>Checkout page</title>
+  </head>
+  <body>
+    <div class="main__container">
+      <header>
+        <h1 class="title-text">Checkout Page</h1>
+      </header>
+
+      <main class="main__content">
+        <aside class="cart__container">
+          <div class="cart__items">
+            <figure class="cart__item">
+              <img src="src/assets/photo1.png" alt="item 1" />
+              <figcaption class="cart__item-text">
+                <h3>Vintage Backbag</h3>
+                <p>
+                  <span class="current__price">$54.99</span>
+                  <small><sup class="old__price">$94.99</sup></small>
+                </p>
+                <div class="control__item">
+                  <button>-</button>
+                  <span class="item__stock">1</span>
+                  <button>+</button>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="cart__item">
+              <img src="src/assets/photo2.png" alt="item 2" />
+              <figcaption class="cart__item-text">
+                <h3>Levi Shoes</h3>
+                <p>
+                  <span class="current__price">$74.99</span>
+                  <small><sup class="old__price">$124.99</sup></small>
+                </p>
+                <div class="control__item">
+                  <button>-</button>
+                  <span class="item__stock">1</span>
+                  <button>+</button>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+
+          <table class="cart__table">
+            <tbody>
+              <tr>
+                <th>Shipping</th>
+                <td>$19</td>
+              </tr>
+              <tr>
+                <th>Total</th>
+                <td>$149.98</td>
+              </tr>
+            </tbody>
+          </table>
+        </aside>
+
+        <form class="form__container">
+          <fieldset class="form__group">
+            <legend class="form__title">Contact information</legend>
+
+            <label for=""> Email </label>
+            <div class="form-control">
+              <i class="bx bxs-envelope"></i>
+              <input
+                type="email"
+                autocomplete="off"
+                placeholder="Enter your email..."
+                name="email"
+                required
+              />
+            </div>
+            <label for="">Phone</label>
+            <div class="form-control">
+              <i class="bx bxs-phone"></i>
+              <input
+                type="tel"
+                autocomplete="off"
+                placeholder="Enter your phone..."
+                name="phone"
+                required
+              />
+            </div>
+          </fieldset>
+
+          <fieldset class="form__group">
+            <legend class="form__title">Shipping Address</legend>
+
+            <label for="">Full name</label>
+            <div class="form-control">
+              <i class="bx bxs-user"></i>
+              <input
+                name="name"
+                type="text"
+                autocomplete="off"
+                placeholder="Enter your name..."
+                value="Rodney Cotton"
+                required
+              />
+            </div>
+
+            <label for="">Address</label>
+            <div class="form-control">
+              <i class="bx bxs-home"></i>
+              <input
+                name="address"
+                type="text"
+                autocomplete="off"
+                placeholder="Enter your address..."
+                required
+              />
+            </div>
+
+            <label for="">City</label>
+            <div class="form-control">
+              <i class="bx bxs-building-house"></i>
+              <input
+                name="city"
+                type="text"
+                autocomplete="off"
+                placeholder="Enter your city..."
+                required
+              />
+            </div>
+
+            <div class="form__row">
+              <div>
+                <label for="country"> Country </label>
+                <div class="form-control">
+                  <i class="bx bxs-building-house"></i>
+                  <select name="country" id="country" required>
+                    <option value="">Select a country</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="USA">USA</option>
+                    <option value="Canada">Canada</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label for=""> Postal Code </label>
+                <div class="form-control">
+                  <i class="bx bx-mail-send"></i>
+                  <input
+                    name="code"
+                    type="number"
+                    maxlength="5"
+                    autocomplete="off"
+                    placeholder="Postal Code..."
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <label for="privace">
+              <input type="checkbox" name="save" id="privace" />
+              Save this information for next time
+            </label>
+          </fieldset>
+
+          <nav class="form__footer">
+            <button type="submit" class="btn btn-primary">Continue</button>
+          </nav>
+        </form>
+      </main>
+
+      <footer>
+        <p>
+          Created by
+          <strong>
+            <a
+              href="https://github.com/ValentinOsvaldos"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Osvaldo Valentin</a
+            >
+          </strong>
+          - DevChallenge
+        </p>
+      </footer>
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      const form = document.querySelector('form');
+
+      const inputs = form.querySelectorAll('[required]');
+      inputs.forEach((input) => {
+        const span = document.createElement('span');
+        span.id = `${input.name}-message`;
+        span.textContent = `${input.name} is required`;
+        span.classList.add('alert__error', 'none');
+
+        input.parentElement.insertAdjacentElement('afterend', span);
+
+        input.addEventListener('invalid', (e) => {
+          e.preventDefault();
+
+          document
+            .getElementById(`${e.target.name}-message`)
+            .classList.remove('none');
+        });
+
+        input.addEventListener('input', (e) => {
+          if (e.target.checkValidity()) {
+            document
+            .getElementById(`${e.target.name}-message`)
+            .classList.add('none');
+          }
+        });
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const data = Object.fromEntries(new FormData(e.target));
+
+        Swal.fire({
+          title: 'Success!',
+          icon: 'success',
+          html: `
+<code>
+  <pre>${JSON.stringify(data, null, 2)}</pre>  
+</code>
+            `,
+          showCloseButton: true,
+          showCancelButton: false,
+          focusConfirm: false,
+        });
+      });
+    </script>
+  </body>
+</html>
